@@ -1,4 +1,119 @@
-vless://1363b3c6-6db8-422c-9056-f93eef15dcda@ob1.nettrust.ru:443?security=reality&type=tcp&flow=xtls-rprx-vision&sni=ads.x5.ru&pbk=nmQRawuVXV1l2_LDVhyJSP58pzxkGejuoeu7ij3C2Vs&sid=187d901c79e47061#%25F0%259F%258C%2590%2520pp
-vless://af609598-9561-4983-bf75-ed7fb5e70e30@avto.srv.dznn.net:443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&fp=chrome&pbk=9F7JxyyP-TNLt0dY2xOB0_34I8W0xXIpFY7rZ7-L0Gg&sid=19aa22f681923dc8&sni=avto.srv.dznn.net#%25F0%259F%258C%2590%2520verified%2520%25C2%25B7%2520t.me/XRayCheck
-vless://4043cb09-ecb6-4001-b08a-da2c4d74f1d5@158.160.138.31:8444?encryption=none&type=tcp&security=reality&fp=chrome&sni=max.ru&pbk=Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw&sid=7dbf7d3233971d5c#%2525F0%25259F%252587%2525B5%2525F0%25259F%252587%2525B1%2520%2525D0%25259F%2525D0%2525BE%2525D0%2525BB%2525D1%25258C%2525D1%252588%2525D0%2525B0%25252C%2520%2525D0%252592%2525D0%2525B0%2525D1%252580%2525D1%252588%2525D0%2525B0%2525D0%2525B2%2525D0%2525B0
-vless://b36fa3f7-daff-453a-85a1-429b1b981815@158.160.138.31:8083?encryption=none&type=tcp&security=reality&fp=chrome&sni=max.ru&pbk=Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw&sid=7dbf7d3233971d5c#%2525F0%25259F%252587%2525AB%2525F0%25259F%252587%2525AE%2520%2525D0%2525A4%2525D0%2525B8%2525D0%2525BD%2525D0%2525BB%2525D1%25258F%2525D0%2525BD%2525D0%2525B4%2525D0%2525B8%2525D1%25258F%25252C%2520%2525D0%2525A5%2525D0%2525B5%2525D0%2525BB%2525D1%25258C%2525D1%252581%2525D0%2525B8%2525D0%2525BD%2525D0%2525BA%2525D0%2525B8
+Обход бс 🏳
+
+{
+  "dns": {
+    "servers": [
+      "1.1.1.1",
+      "1.0.0.1"
+    ],
+    "queryStrategy": "UseIP"
+  },
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "protocol": [
+          "bittorrent"
+        ],
+        "outboundTag": "direct"
+      },
+      {
+        "type": "field",
+        "outboundTag": "proxy",
+        "network": "tcp,udp"
+      }
+    ],
+    "domainMatcher": "hybrid",
+    "domainStrategy": "IPIfNonMatch"
+  },
+  "inbounds": [
+    {
+      "tag": "socks",
+      "port": 10808,
+      "listen": "127.0.0.1",
+      "protocol": "socks",
+      "settings": {
+        "udp": true,
+        "auth": "noauth"
+      },
+      "sniffing": {
+        "enabled": true,
+        "routeOnly": false,
+        "destOverride": [
+          "http",
+          "tls",
+          "quic"
+        ]
+      }
+    },
+    {
+      "tag": "http",
+      "port": 10809,
+      "listen": "127.0.0.1",
+      "protocol": "http",
+      "settings": {
+        "allowTransparent": false
+      },
+      "sniffing": {
+        "enabled": true,
+        "routeOnly": false,
+        "destOverride": [
+          "http",
+          "tls",
+          "quic"
+        ]
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "proxy",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "185.71.67.79",
+            "port": 443,
+            "users": [
+              {
+                "id": "098a3826-bd08-4d13-a350-c4a3e8a894dc",
+                "encryption": "none"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "wl2.kittystars.ru",
+          "fingerprint": "chrome",
+          "allowInsecure": false,
+          "alpn": [
+            "h3",
+            "h2",
+            "http/1.1"
+          ]
+        },
+        "wsSettings": {
+          "path": "/ws",
+          "headers": {
+            "Host": "wl2.kittystars.ru"
+          }
+        }
+      },
+      "remarks": "🇵🇱 Белые списки "
+    },
+    {
+      "tag": "direct",
+      "protocol": "freedom"
+    },
+    {
+      "tag": "block",
+      "protocol": "blackhole"
+    }
+  ],
+  "remarks": "🇷🇺ОБХОД VPN || Белые списки 3 "
+}
